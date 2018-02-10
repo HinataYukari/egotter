@@ -14,10 +14,10 @@ pic_count = 4
 prefix = "images/glt/ic"
 formattype = ".png"
 #本文
-text = "GirlsLastTour"
+text = "girls_last_tour"
 
 #画像投稿　
-media_ids = []
+media_ids = ""
 for i in range(pic_count):
     # 画像アップ
     files = {"media" : open(prefix + str(i+1) + formattype, 'rb')}
@@ -25,20 +25,26 @@ for i in range(pic_count):
 
     # レスポンスを確認
     if req_media.status_code != 200:
-        print ("画像アップデート失敗: %s", req_media.text)
+        print ("picture update failed: %s", req_media.text)
         exit()
 
     # Media ID を取得
-    media_ids.append(json.loads(req_media.text)['media_id'])
-    print ("Media ID: %d" % media_ids[i])
+    media_id = json.loads(req_media.text)['media_id']
+    media_id_string = json.loads(req_media.text)['media_id_string']
+    print ("Media ID: {} ".format(media_id))
+    # メディアIDの文字列をカンマ","で結合
+    if media_ids == "":
+        media_ids += media_id_string
+    else:
+        media_ids = media_ids + "," + media_id_string
 
 # Media ID を付加してテキストを投稿
-params = {"status": text, "media_ids": media_ids}
+params = {"status": text, "media_ids": [media_ids]}
 req_media = twitter.post(url_text, params = params)
 
 # 再びレスポンスを確認
 if req_media.status_code != 200:
-    print ("テキストアップデート失敗: %s", req_text.text)
+    print ("text update failed: %s", req_text.text)
     exit()
 
-print ("OK")
+print ("Succeded")
