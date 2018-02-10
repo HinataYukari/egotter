@@ -1,5 +1,5 @@
 from requests_oauthlib import OAuth1Session
-import * from api
+from api import * 
 
 #APIの投稿専用URL
 url = "https://api.twitter.com/1.1/statuses/update.json"
