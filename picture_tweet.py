@@ -11,7 +11,7 @@ twitter = OAuth1Session(Consumer_Key, Consumer_Secret, Access_Token, Access_Toke
 #画像枚数(1-4)
 pic_count = 4
 #画像パス
-prefix = "images/glt/ic"
+prefix = "images/xxx"
 formattype = ".png"
 #本文
 text = "girls_last_tour"
