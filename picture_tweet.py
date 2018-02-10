@@ -47,4 +47,4 @@ if req_media.status_code != 200:
     print ("text update failed: %s", req_text.text)
     exit()
 
-print ("Succeded")
+print ("Succeeded")
